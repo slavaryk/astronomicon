@@ -4,7 +4,7 @@
 			{{ ticker.title }} - USD
 		</p>
 		<p class="base-ticker__price">
-			{{ ticker.priceInUSD }}
+			{{ ticker.priceInUSD.toPrecision(PRECISION) }}
 		</p>
 	</article>
 </template>
@@ -17,4 +17,6 @@ type Props = {
 }
 
 defineProps<Props>();
+
+const PRECISION = 10;
 </script>
