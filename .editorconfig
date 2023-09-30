@@ -1,0 +1,15 @@
+root = true
+
+[*.{ts,js,mjs,json,astro,vue}]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+tab_width = 2
+
+[*.{cjs,css}]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab
+tab_width = 4
