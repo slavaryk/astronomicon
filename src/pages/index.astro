@@ -1,10 +1,24 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import AddTicker from "../components/AddTicker.vue";
 import TickerList from "../components/TickerList.vue";
 ---
 
 <Layout title="Astronomicon">
 	<main>
-		<TickerList client:only="vue"/>
+		<AddTicker class="index__add-ticker" client:load/>
+		<div class="index__ticker-list">
+			<TickerList client:only="vue"/>
+		</div>
 	</main>
 </Layout>
+
+<style>
+.index__add-ticker {
+	margin-top: 2rem;
+}
+
+.index__ticker-list {
+	margin-top: 2.5rem;
+}
+</style>

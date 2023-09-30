@@ -6,7 +6,7 @@
 			class="ticker-list__item"
 		>
 			<a href="/ticker">
-				<BaseTicker :ticker="ticker"/>
+				<BaseTicker :ticker="ticker" />
 			</a>
 		</li>
 	</ul>

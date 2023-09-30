@@ -1,13 +1,13 @@
 import { addSubscriptionTo, postMessageTo } from "./transmitter";
 import { MessageParty } from "./enum/MessageParty";
 import { TickerDTO as BuildTickerDTO } from "./dto";
-import type { Ticker, TickerDTO, TickerSymbol, TickerResponse } from "./types/Ticker";
+import type { Ticker, TickerDTO, TickerSymbol, TickerPriceResponse } from "./types/Ticker";
 
 const subscribers = new Map<TickerSymbol, ((tickerDto: TickerDTO) => void)[]>();
 
 addSubscriptionTo(MessageParty.WEB_SOCKET, receiveUpdateTickerMessage);
 
-export function receiveUpdateTickerMessage(ticker: TickerResponse) {
+export function receiveUpdateTickerMessage(ticker: TickerPriceResponse) {
 	const dto = BuildTickerDTO(ticker);
 	if (subscribers.has(dto.symbol) && dto.newPrice !== null) notifySubscribers(dto);
 }

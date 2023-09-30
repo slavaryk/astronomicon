@@ -38,5 +38,22 @@ module.exports = {
 		"arrow-parens": ["error", "as-needed"],
 		"no-unused-vars": "off",
 		"@typescript-eslint/no-unused-vars": "error",
+		"vue/max-attributes-per-line": ["error", {
+			"singleline": {
+				"max": 2,
+			},
+			"multiline": {
+				"max": 1,
+			},
+		}],
+		"vue/html-closing-bracket-newline": ["error", {
+			"singleline": "never",
+			"multiline": "always",
+		}],
+		"vue/html-closing-bracket-spacing": ["error", {
+			"startTag": "never",
+			"endTag": "never",
+			"selfClosingTag": "always",
+		}],
 	},
 };
