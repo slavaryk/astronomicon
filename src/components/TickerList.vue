@@ -1,8 +1,8 @@
 <template>
 	<ul class="ticker-list">
 		<li
-			v-for="ticker of tickers"
-			:key="ticker.title"
+			v-for="ticker of tickersStore"
+			:key="`${ticker.id}-${ticker.priceInUSD}`"
 			class="ticker-list__item"
 		>
 			<a href="/ticker">
@@ -13,35 +13,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { watch } from "vue";
+import { useStore } from "@nanostores/vue";
+import { $tickers } from "../stores/tickers";
+import { $tickersCounter } from "../stores/tickers-counter";
+import { TickersDispatcher, TickersActions } from "../stores/tickers/actions";
 import { subscribeToUpdatesOf } from "../pub-sub";
 import BaseTicker from "./BaseTicker.vue";
-import type { Ticker } from "../types/Ticker";
 
-const tickers = ref<Ticker[]>([
-	{
-		title: "Bitcoin",
-		symbol: "BTC",
-		priceInUSD: 0,
-	},
-	{
-		title: "Ethereum",
-		symbol: "ETH",
-		priceInUSD: 0,
-	},
-	{
-		title: "Litecoin",
-		symbol: "LTC",
-		priceInUSD: 0,
-	},
-]);
+const tickersStore = useStore($tickers);
+const tickersCounterStore = useStore($tickersCounter);
 
-onMounted(() => {
-	for (const ticker of tickers.value) {
-		subscribeToUpdatesOf(ticker, tickerDTO => {
-			ticker.priceInUSD = tickerDTO.newPrice!;
-		});
-	}
+watch(tickersCounterStore, () => {
+	const ticker = tickersStore.value[tickersCounterStore.value];
+
+	subscribeToUpdatesOf(ticker, (newPriceDto) => {
+		TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, tickersCounterStore.value, newPriceDto);
+	});
 });
 </script>
 

@@ -1,26 +1,26 @@
 import { addSubscriptionTo, postMessageTo } from "./transmitter";
 import { MessageParty } from "./enum/MessageParty";
-import { TickerDTO as BuildTickerDTO } from "./dto";
-import type { Ticker, TickerDTO, TickerSymbol, TickerPriceResponse } from "./types/Ticker";
+import { NewTickerPriceDTO } from "./dto";
+import type { Ticker, NewTickerPriceDTO as _NewTickerPriceDTO, TickerSymbol, TickerPriceResponse } from "./types/Ticker";
 
-const subscribers = new Map<TickerSymbol, ((tickerDto: TickerDTO) => void)[]>();
+const subscribers = new Map<TickerSymbol, ((newTickerPrice: _NewTickerPriceDTO) => void)[]>();
 
 addSubscriptionTo(MessageParty.WEB_SOCKET, receiveUpdateTickerMessage);
 
 export function receiveUpdateTickerMessage(ticker: TickerPriceResponse) {
-	const dto = BuildTickerDTO(ticker);
+	const dto = NewTickerPriceDTO(ticker);
 	if (subscribers.has(dto.symbol) && dto.newPrice !== null) notifySubscribers(dto);
 }
 
-function notifySubscribers(tickerDTO: TickerDTO) {
-	for (const callback of subscribers.get(tickerDTO.symbol)!) {
-		callback(tickerDTO);
+function notifySubscribers(newTickerPrice: _NewTickerPriceDTO) {
+	for (const callback of subscribers.get(newTickerPrice.symbol)!) {
+		callback(newTickerPrice);
 	}
 }
 
 export function subscribeToUpdatesOf(
 	ticker: Ticker,
-	callback: (tickerDTO: TickerDTO) => void,
+	callback: (newTickerPriceDTO: _NewTickerPriceDTO) => void,
 )
 {
 	const tickerSymbol = ticker.symbol;

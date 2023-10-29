@@ -15,13 +15,37 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { $ticker } from "../stores/ticker";
+import { getTickerAssets } from "../api";
+import { TickersDispatcher, TickersActions } from "../stores/tickers/actions";
+import { TickerAssetDTO } from "../dto";
+import type { Ticker, TickerAssetResponse } from "../types/Ticker";
 
 const newTickerSym = ref("");
 
-function handleNewTickerEnter() {
-	$ticker.setKey("symbol", newTickerSym.value);
-	newTickerSym.value = "";
+async function handleNewTickerEnter() {
+	try {
+		const response = await getTickerAssets(newTickerSym.value);
+		handleTickerAssetResponse(response);
+	} catch (error) {
+		console.error(error);
+	} finally {
+		newTickerSym.value = "";
+	}
+}
+
+function handleTickerAssetResponse(response: TickerAssetResponse) {
+	const dto = TickerAssetDTO(response);
+	const newTicker: Ticker = {
+		id: dto.id,
+		symbol: dto.symbol,
+		title: dto.title.toUpperCase(),
+		logoUrl: dto.logoUrl || '#',
+		description: dto.description,
+		websiteUrl: dto.websiteUrl,
+		priceInUSD: 0,
+	}
+
+	TickersDispatcher.dispatch(TickersActions.AddNewTicker, newTicker);
 }
 </script>
 
@@ -39,11 +63,12 @@ function handleNewTickerEnter() {
 }
 
 .add-ticker__input {
+	min-height: calc(1rem + 3px);
 	margin: 0;
 	padding: 7px 17px;
 	border: 1px solid #999;
 	border-radius: 4px;
-	font-size: 1.5rem;
+	font-size: 1rem;
 	font-family: monospace;
 	letter-spacing: 0.2em;
 	transition: border-color 0.15s, box-shadow 0.15s;

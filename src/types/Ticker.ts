@@ -1,12 +1,25 @@
 export type Ticker = {
-	title: string;
+	id: number;
 	symbol: TickerSymbol;
+	title: string;
+	logoUrl: string;
+	description: string;
+	websiteUrl: string;
 	priceInUSD: number;
 }
 
-export type TickerDTO = {
+export type NewTickerPriceDTO = {
 	symbol: TickerSymbol;
 	newPrice: number | null;
+}
+
+export type TickerAssetDTO = {
+	id: number;
+	symbol: TickerSymbol;
+	title: string;
+	logoUrl: string;
+	description: string;
+	websiteUrl: string;
 }
 
 export type TickerSymbol = string;
@@ -17,8 +30,12 @@ export type TickerPriceResponse = {
 }
 
 export type TickerAssetResponse = {
-	NAME?: string;
-	LOGO_URL: string;
-	ASSET_DESCRIPTION_SUMMARY?: string;
-	WEBSITE_URL?: string;
+	Data: {
+		ID: number;
+		SYMBOL?: string;
+		NAME?: string;
+		LOGO_URL: string;
+		ASSET_DESCRIPTION_SNIPPET?: string;
+		WEBSITE_URL?: string;
+	};
 }
