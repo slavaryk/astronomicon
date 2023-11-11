@@ -1,22 +1,25 @@
 <template>
 	<article class="base-ticker">
 		<p class="base-ticker__title">
-			{{ ticker.title }} - USD
+			{{ tickerTitle }} - USD
 		</p>
 		<p class="base-ticker__price">
-			{{ ticker.priceInUSD.toPrecision(PRECISION) }}
+			{{ price }}
 		</p>
 	</article>
 </template>
 
 <script setup lang="ts">
-import type { Ticker } from "../types/Ticker";
+import { computed } from "vue";
 
 type Props = {
-	ticker: Ticker;
+	tickerPrice: number;
+	tickerTitle: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const PRECISION = 10;
+
+const price = computed(() => props.tickerPrice.toPrecision(PRECISION));
 </script>

@@ -1,0 +1,6 @@
+.ticker-list {
+	padding-inline-start: 0;
+	display: flex;
+	column-gap: 5%;
+	list-style-type: none;
+}

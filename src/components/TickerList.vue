@@ -2,11 +2,14 @@
 	<ul class="ticker-list">
 		<li
 			v-for="ticker of tickersStore"
-			:key="`${ticker.id}-${ticker.priceInUSD}`"
+			:key="ticker.id"
 			class="ticker-list__item"
 		>
 			<a href="/ticker">
-				<BaseTicker :ticker="ticker" />
+				<BaseTicker
+					:ticker-price="ticker.priceInUSD"
+					:ticker-title="ticker.title"
+				/>
 			</a>
 		</li>
 	</ul>
@@ -28,16 +31,7 @@ watch(tickersCounterStore, () => {
 	const ticker = tickersStore.value[tickersCounterStore.value];
 
 	subscribeToUpdatesOf(ticker, (newPriceDto) => {
-		TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, tickersCounterStore.value, newPriceDto);
+		TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, ticker, newPriceDto);
 	});
 });
 </script>
-
-<style>
-.ticker-list {
-	padding-inline-start: 0;
-	display: flex;
-	column-gap: 5%;
-	list-style-type: none;
-}
-</style>

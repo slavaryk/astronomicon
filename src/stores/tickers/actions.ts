@@ -24,11 +24,11 @@ export const TickersDispatcher: Dispatcher<TickersActions> = {
 	[TickersActions.UpdateTickerPrice]: action(
 		$tickers,
 		TickersActions.UpdateTickerPrice,
-		(store, tickerIndex: number, newPriceDto: NewTickerPriceDTO) => {
+		(store, ticker: Ticker, newPriceDto: NewTickerPriceDTO) => {
 			const tickers = store.get();
-			const tickerToChange = tickers[tickerIndex];
+			const tickerIndex = tickers.findIndex(_ => _.id === ticker.id);
 
-			tickerToChange.priceInUSD = newPriceDto.newPrice;
+			tickers[tickerIndex].priceInUSD = newPriceDto.newPrice;
 
 			store.set([...tickers]);
 		},
