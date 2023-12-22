@@ -5,7 +5,7 @@
 			:key="ticker.id"
 			class="ticker-list__item"
 		>
-			<a href="/ticker">
+			<a :href="`/${ticker.id}`">
 				<BaseTicker
 					:ticker-price="ticker.priceInUSD"
 					:ticker-title="ticker.title"
@@ -30,7 +30,7 @@ const tickersCounterStore = useStore($tickersCounter);
 watch(tickersCounterStore, () => {
 	const ticker = tickersStore.value[tickersCounterStore.value];
 
-	subscribeToUpdatesOf(ticker, (newPriceDto) => {
+	subscribeToUpdatesOf(ticker, newPriceDto => {
 		TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, ticker, newPriceDto);
 	});
 });

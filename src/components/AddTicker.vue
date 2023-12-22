@@ -50,11 +50,15 @@ function handleTickerAssetResponse(response: TickerAssetResponse) {
 		id: dto.id,
 		symbol: dto.symbol,
 		title: dto.title.toUpperCase(),
-		logoUrl: dto.logoUrl || '#',
+		logoUrl: dto.logoUrl || "#",
 		description: dto.description,
 		websiteUrl: dto.websiteUrl,
-		priceInUSD: 0,
-	}
+		priceInUSD: dto.priceInUSD,
+		priceInUSDUpdatedOn: dto.priceInUSDUpdatedOn,
+		createdOn: dto.createdOn,
+		launchDate: dto.launchDate,
+		fullDescription: dto.fullDescription,
+	};
 
 	TickersDispatcher.dispatch(TickersActions.AddNewTicker, newTicker);
 }

@@ -1,0 +1,43 @@
+.ticker-complete-info {
+	display: flex;
+	column-gap: 1em;
+}
+
+.ticker-complete-info__header {
+	min-width: 300px;
+	margin-top: 1.5em;
+	padding-right: 2em;
+	padding-bottom: 2em;
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+	border-right: 1px solid color(srgb 0.9333 0.9333 0.9334);
+}
+
+.ticker-complete-info__logo {
+	max-width: 72px;
+	height: auto;
+}
+
+.ticker-complete-info__title {
+	font-size: 2em;
+}
+
+.ticker-complete-info__text {
+	letter-spacing: initial;
+}
+
+.ticker-complete-info__list-box {
+	flex: 1 1 auto;
+}
+
+.ticker-complete-info__list {
+	padding-inline-start: 0;
+	list-style-type: none;
+}
+
+.ticker-complete-info__info {
+	margin-top: 1.5em;
+	display: flex;
+	column-gap: 1.5em;
+}

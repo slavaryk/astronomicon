@@ -6,6 +6,10 @@ export type Ticker = {
 	description: string;
 	websiteUrl: string;
 	priceInUSD: number;
+	createdOn: Date | 0;
+	launchDate: Date | 0;
+	priceInUSDUpdatedOn: Date | 0;
+	fullDescription: string;
 }
 
 export type NewTickerPriceDTO = {
@@ -20,6 +24,11 @@ export type TickerAssetDTO = {
 	logoUrl: string;
 	description: string;
 	websiteUrl: string;
+	createdOn: Date | 0;
+	launchDate: Date | 0;
+	priceInUSD: number;
+	priceInUSDUpdatedOn: Date | 0;
+	fullDescription: string;
 }
 
 export type TickerSymbol = string;
@@ -37,5 +46,10 @@ export type TickerAssetResponse = {
 		LOGO_URL: string;
 		ASSET_DESCRIPTION_SNIPPET?: string;
 		WEBSITE_URL?: string;
+		CREATED_ON?: number;
+		LAUNCH_DATE?: number;
+		PRICE_USD?: number;
+		PRICE_USD_LAST_UPDATE_TS?: number;
+		ASSET_DESCRIPTION?: string;
 	};
 }
