@@ -20,7 +20,6 @@ function resolveTitle(key: keyof Ticker) {
 	case "launchDate": return "Launch date";
 	case "priceInUSD": return "Price (USD)";
 	case "priceInUSDUpdatedOn": return "Price (USD) updated on";
-	case "fullDescription": return "Full description";
 	default: return "";
 	}
 }

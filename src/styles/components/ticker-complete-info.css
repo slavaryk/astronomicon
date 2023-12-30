@@ -41,3 +41,16 @@
 	display: flex;
 	column-gap: 1.5em;
 }
+
+.ticker-complete-info__info * {
+	letter-spacing: initial;
+}
+
+.ticker-complete-info__info-title {
+	width: 30%;
+	min-width: 150px;
+}
+
+.ticker-complete-info__link {
+	text-decoration: underline;
+}
