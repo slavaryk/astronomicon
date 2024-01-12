@@ -7,11 +7,11 @@ export const prerender = false;
 const { ticker } = Astro.params;
 ---
 
-<main>
-	<Layout title="Ticker">
+<Layout title="Ticker">
+	<section>
 		<TickerCompleteInfo
 			client:only="vue"
 			tickerId={ticker}
 		/>
-	</Layout>
-</main>
+	</section>
+</Layout>

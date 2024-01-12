@@ -1,14 +1,23 @@
 #app {
     max-width: 1280px;
     width: 100%;
-    margin: 0 auto;
-    padding: 2rem;
+    margin: 0;
     font-weight: normal;
 }
 
+#modals {
+	height: 0;
+	position: sticky;
+	top: 0;
+	left: 0;
+}
+
 a {
-    color: currentColor;
     text-decoration: none;
+}
+
+.main {
+	padding: 0 50px;
 }
 
 @media (hover: hover) {
@@ -23,4 +32,4 @@ a {
         letter-spacing: 0.2em;
     }
 }
-  
+

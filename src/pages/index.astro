@@ -5,12 +5,12 @@ import TickerList from "../components/TickerList.vue";
 ---
 
 <Layout title="Astronomicon">
-	<main>
+	<section>
 		<AddTicker class="index__add-ticker" client:load/>
 		<div class="index__ticker-list">
 			<TickerList client:only="vue"/>
 		</div>
-	</main>
+	</section>
 </Layout>
 
 <style>

@@ -36,6 +36,7 @@
 				</li>
 			</ul>
 		</article>
+		<FullDescriptionModal :description="currentTicker.fullDescription" />
 	</section>
 </template>
 
@@ -44,6 +45,8 @@ import { computed } from "vue";
 import { useStore } from "@nanostores/vue";
 import { $tickers } from "../stores/tickers";
 import { useTickerInfoTitles } from "../composables/useTickerInfoTitles";
+
+import FullDescriptionModal from "./modals/FullDescriptionModal.vue";
 
 type Props = {
 	tickerId: string;

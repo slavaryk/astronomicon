@@ -22,11 +22,14 @@ const { title } = Astro.props;
 		<ViewTransitions/>
 	</head>
 	<body id="app">
-		<header>
+		<div id="modals"></div>
+		<header class="header">
 			<h1>Astronomicon</h1>
 			<hr class="divider"/>
 		</header>
-		<slot />
+		<main class="main">
+			<slot />
+		</main>
 	</body>
 </html>
 
@@ -35,5 +38,9 @@ const { title } = Astro.props;
 	border-top-style: none;
 	border-left-width: 0;
 	border-right-width: 0;
+}
+
+.header {
+	padding: 0 50px;
 }
 </style>
