@@ -11,6 +11,7 @@
 </template>
 
 <script setup lang="ts">
+// TODO: Should be incapsulated inside the composable
 import markdownit from "markdown-it";
 
 import BaseModal from "./BaseModal.vue";
