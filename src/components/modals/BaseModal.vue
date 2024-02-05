@@ -9,20 +9,20 @@
 				class="base-modal__content"
 				@click.stop
 			>
-				<slot/>
+				<slot />
 			</div>
 		</div>
 	</Teleport>
 </template>
 
 <script setup lang="ts">
-import { Teleport } from 'vue';
+import { Teleport } from "vue";
 
 defineProps<{
 	isOpen: boolean;
 }>();
 
 const emit = defineEmits<{
-	'close': [];
+	"close": [];
 }>();
 </script>
