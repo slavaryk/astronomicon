@@ -1,7 +1,5 @@
 <template>
-	<BaseModal
-		:is-open="true"
-	>
+	<BaseModal :is-open="isOpen">
 		<div
 			class="full-description-modal"
 			v-html="descriptionHtml"
@@ -11,15 +9,16 @@
 </template>
 
 <script setup lang="ts">
-// TODO: Should be incapsulated inside the composable
-import markdownit from "markdown-it";
+import { useMarkdownParser } from "../../composables/useMarkdownParser";
 
 import BaseModal from "./BaseModal.vue";
 
 const props = defineProps<{
+	isOpen: boolean;
 	description: string;
 }>();
 
-const md = markdownit();
-const descriptionHtml = md.render(props.description);
+const { parse } = useMarkdownParser();
+
+const descriptionHtml = parse(props.description);
 </script>

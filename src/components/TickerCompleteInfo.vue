@@ -12,6 +12,12 @@
 			<div class="ticker-complete-info__text">
 				{{ currentTicker.description }}
 			</div>
+			<button
+				class="ticker-complete-info__button"
+				@click="isDescriptionModalOpen = true"
+			>
+				Show full description
+			</button>
 		</header>
 		<article class="ticker-complete-info__list-box">
 			<ul class="ticker-complete-info__list">
@@ -36,12 +42,16 @@
 				</li>
 			</ul>
 		</article>
-		<FullDescriptionModal :description="currentTicker.fullDescription" />
+		<FullDescriptionModal
+			:description="currentTicker.fullDescription"
+			:is-open="isDescriptionModalOpen"
+			@close="isDescriptionModalOpen = false"
+		/>
 	</section>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, computed } from "vue";
 import { useStore } from "@nanostores/vue";
 import { $tickers } from "../stores/tickers";
 import { useTickerInfoTitles } from "../composables/useTickerInfoTitles";
@@ -55,6 +65,8 @@ type Props = {
 const props = defineProps<Props>();
 
 const tickersStore = useStore($tickers);
+
+const isDescriptionModalOpen = ref(false);
 
 const currentTicker = computed(() => tickersStore.value.find(_ => _.id === +props.tickerId));
 

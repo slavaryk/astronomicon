@@ -4,7 +4,7 @@
 }
 
 .ticker-complete-info__header {
-	min-width: 300px;
+	flex: 1 1 50%;
 	margin-top: 1.5em;
 	padding-right: 2em;
 	padding-bottom: 2em;
@@ -27,8 +27,14 @@
 	letter-spacing: initial;
 }
 
+.ticker-complete-info__button {
+	width: max-content;
+	padding: 0;
+	text-decoration: underline;
+}
+
 .ticker-complete-info__list-box {
-	flex: 1 1 auto;
+	flex: 1 1 300px;
 }
 
 .ticker-complete-info__list {
@@ -39,6 +45,7 @@
 .ticker-complete-info__info {
 	margin-top: 1.5em;
 	display: flex;
+	justify-content: space-between;
 	column-gap: 1.5em;
 }
 
@@ -47,7 +54,7 @@
 }
 
 .ticker-complete-info__info-title {
-	width: 30%;
+	flex: 1 1 40%;
 	min-width: 150px;
 }
 
