@@ -26,17 +26,17 @@
 					:key="tuple[0]"
 					class="ticker-complete-info__info"
 				>
-					<div class="ticker-complete-info__info-title">{{ tuple[1] }}: </div>
+					<div class="ticker-complete-info__info-title">{{ tuple[0] }}: </div>
 					<div>
 						<a
 							v-if="tuple[2]"
 							class="ticker-complete-info__link"
-							:href="`${currentTicker[tuple[0]]}`"
+							:href="tuple[1]"
 						>
-							{{ currentTicker[tuple[0]] }}
+							{{ tuple[1] }}
 						</a>
 						<template v-else>
-							{{ currentTicker[tuple[0]] }}
+							{{ tuple[1] }}
 						</template>
 					</div>
 				</li>
