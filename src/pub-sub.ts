@@ -1,7 +1,13 @@
 import { addSubscriptionTo, postMessageTo } from "./transmitter";
 import { MessageParty } from "./enum/MessageParty";
 import { NewTickerPriceDTO } from "./dto";
-import type { Ticker, NewTickerPriceDTO as _NewTickerPriceDTO, TickerSymbol, TickerPriceResponse } from "./types/Ticker";
+
+import type {
+	TickerShort,
+	NewTickerPriceDTO as _NewTickerPriceDTO,
+	TickerSymbol,
+	TickerPriceResponse,
+} from "./types/Ticker";
 
 const subscribers = new Map<TickerSymbol, ((newTickerPrice: _NewTickerPriceDTO) => void)[]>();
 
@@ -19,7 +25,7 @@ function notifySubscribers(newTickerPrice: _NewTickerPriceDTO) {
 }
 
 export function subscribeToUpdatesOf(
-	ticker: Ticker,
+	ticker: TickerShort,
 	callback: (newTickerPriceDTO: _NewTickerPriceDTO) => void,
 )
 {

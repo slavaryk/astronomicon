@@ -1,17 +1,28 @@
 ---
+import { getTickerAssets } from "../api";
+import { TickerAssetDTO as _TickerAssetDTO } from "../dto";
+
 import Layout from "../layouts/Layout.astro";
 import TickerCompleteInfo from "../components/TickerCompleteInfo.vue";
 
+import type { Ticker, TickerAssetResponse } from "../types/Ticker";
+
 export const prerender = false;
 
-const { ticker } = Astro.params;
+const { ticker: tickerSym } = Astro.params;
+
+const response: TickerAssetResponse = await getTickerAssets(tickerSym);
+
+// TODO:
+// 1) Change to Ticker []
+const dto: TickerAssetDTO = _TickerAssetDTO(response);
 ---
 
 <Layout title="Ticker">
 	<section>
 		<TickerCompleteInfo
-			client:only="vue"
-			tickerId={ticker}
+			client:load
+			ticker={dto}
 		/>
 	</section>
 </Layout>

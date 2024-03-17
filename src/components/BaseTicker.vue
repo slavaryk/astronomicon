@@ -13,7 +13,7 @@
 import { computed } from "vue";
 
 type Props = {
-	tickerPrice: number;
+	tickerPrice: number | null;
 	tickerTitle: string;
 }
 
@@ -21,5 +21,5 @@ const props = defineProps<Props>();
 
 const PRECISION = 10;
 
-const price = computed(() => props.tickerPrice.toPrecision(PRECISION));
+const price = computed(() => props.tickerPrice?.toPrecision(PRECISION) ?? '---');
 </script>

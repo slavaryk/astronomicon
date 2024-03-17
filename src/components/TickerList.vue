@@ -2,13 +2,13 @@
 	<ul class="ticker-list">
 		<li
 			v-for="ticker of tickersStore"
-			:key="ticker.id"
+			:key="ticker.symbol"
 			class="ticker-list__item"
 		>
-			<a :href="`/${ticker.id}`">
+			<a :href="`/${ticker.symbol}`">
 				<BaseTicker
-					:ticker-price="ticker.priceInUSD"
-					:ticker-title="ticker.title"
+					:ticker-price="ticker.price"
+					:ticker-title="ticker.symbol"
 				/>
 			</a>
 		</li>

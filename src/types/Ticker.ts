@@ -12,9 +12,9 @@ export type Ticker = {
 	fullDescription: string;
 }
 
-export type NewTickerPriceDTO = {
+export type TickerShort = {
 	symbol: TickerSymbol;
-	newPrice: number | null;
+	price: number | null;
 }
 
 export type TickerAssetDTO = {
@@ -29,6 +29,11 @@ export type TickerAssetDTO = {
 	priceInUSD: number;
 	priceInUSDUpdatedOn: Date | 0;
 	fullDescription: string;
+}
+
+export type NewTickerPriceDTO = {
+	symbol: TickerSymbol;
+	newPrice: number | null;
 }
 
 export type TickerSymbol = string;

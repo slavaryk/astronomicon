@@ -1,16 +1,19 @@
 <template>
-	<section class="ticker-complete-info">
+	<section
+		v-if="ticker"
+		class="ticker-complete-info"
+	>
 		<header class="ticker-complete-info__header">
 			<img
 				alt="Ticker logo"
 				class="ticker-complete-info__logo"
-				:src="currentTicker.logoUrl"
+				:src="ticker.logoUrl"
 			/>
 			<div class="ticker-complete-info__title">
-				{{ currentTicker.title }}
+				{{ ticker.title }}
 			</div>
 			<div class="ticker-complete-info__text">
-				{{ currentTicker.description }}
+				{{ ticker.description }}
 			</div>
 			<button
 				class="ticker-complete-info__button"
@@ -43,7 +46,7 @@
 			</ul>
 		</article>
 		<FullDescriptionModal
-			:description="currentTicker.fullDescription"
+			:description="ticker.fullDescription"
 			:is-open="isDescriptionModalOpen"
 			@close="isDescriptionModalOpen = false"
 		/>
@@ -51,25 +54,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useStore } from "@nanostores/vue";
-import { $tickers } from "../stores/tickers";
+import { ref } from "vue";
 import { useTickerInfoTitles } from "../composables/useTickerInfoTitles";
 
 import FullDescriptionModal from "./modals/FullDescriptionModal.vue";
 
+import type { Ticker } from "../types/Ticker";
+
 type Props = {
-	tickerId: string;
+	ticker: Ticker;
 }
 
 const props = defineProps<Props>();
 
-const tickersStore = useStore($tickers);
-
 const isDescriptionModalOpen = ref(false);
 
-const currentTicker = computed(() => tickersStore.value.find(_ => _.id === +props.tickerId));
-
-const { titles } = useTickerInfoTitles(currentTicker.value);
-console.log(currentTicker.value);
+const { titles } = useTickerInfoTitles(props.ticker);
 </script>

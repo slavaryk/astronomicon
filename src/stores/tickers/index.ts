@@ -1,4 +1,4 @@
 import { atom } from "nanostores";
-import type { Ticker } from "../../types/Ticker";
+import type { TickerShort } from "../../types/Ticker";
 
-export const $tickers = atom<Ticker[]>([]);
+export const $tickers = atom<TickerShort[]>([]);

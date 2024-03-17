@@ -20,7 +20,7 @@ function resolveTitle(entry: TickerEntry): TitleTuple | undefined {
 }
 
 export const useTickerInfoTitles = (tickerInfo: Ticker) => {
-	const titles = ref<TitleTuple[]>(Object.entries(tickerInfo).reduce((acc, entry: TickerEntry) => {
+	const titles = ref<TitleTuple[]>(Object.entries(tickerInfo ?? {}).reduce((acc, entry: TickerEntry) => {
 		const titleTuple = resolveTitle(entry);
 
 		if (!titleTuple) return acc;

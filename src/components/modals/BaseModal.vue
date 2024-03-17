@@ -1,7 +1,6 @@
 <template>
-	<Teleport to="#modals">
+	<Teleport v-if="isOpen" to="#modals">
 		<div
-			v-if="isOpen"
 			class="base-modal"
 			@click="emit('close')"
 		>

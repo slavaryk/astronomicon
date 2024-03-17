@@ -1,7 +1,7 @@
 import { action } from "nanostores";
 import { $tickers } from ".";
 import type { Dispatcher } from "../../types/Dispatcher";
-import type { Ticker, NewTickerPriceDTO } from "../../types/Ticker";
+import type { TickerShort, NewTickerPriceDTO } from "../../types/Ticker";
 
 export enum TickersActions {
 	AddNewTicker = "AddNewTicker",
@@ -16,7 +16,7 @@ export const TickersDispatcher: Dispatcher<TickersActions> = {
 	[TickersActions.AddNewTicker]: action(
 		$tickers,
 		TickersActions.AddNewTicker,
-		(store, newTicker: Ticker) => {
+		(store, newTicker: TickerShort) => {
 			store.set([...store.get(), newTicker]);
 		},
 	),
@@ -24,11 +24,11 @@ export const TickersDispatcher: Dispatcher<TickersActions> = {
 	[TickersActions.UpdateTickerPrice]: action(
 		$tickers,
 		TickersActions.UpdateTickerPrice,
-		(store, ticker: Ticker, newPriceDto: NewTickerPriceDTO) => {
+		(store, ticker: TickerShort, newPriceDto: NewTickerPriceDTO) => {
 			const tickers = store.get();
-			const tickerIndex = tickers.findIndex(_ => _.id === ticker.id);
+			const tickerIndex = tickers.findIndex(_ => _.symbol === ticker.symbol);
 
-			tickers[tickerIndex].priceInUSD = newPriceDto.newPrice;
+			tickers[tickerIndex].price = newPriceDto.newPrice;
 
 			store.set([...tickers]);
 		},
