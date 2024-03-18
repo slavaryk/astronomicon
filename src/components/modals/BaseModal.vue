@@ -15,8 +15,6 @@
 </template>
 
 <script setup lang="ts">
-import { Teleport } from "vue";
-
 defineProps<{
 	isOpen: boolean;
 }>();
