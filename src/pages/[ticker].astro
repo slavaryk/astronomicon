@@ -5,24 +5,32 @@ import { TickerAssetDTO as _TickerAssetDTO } from "../dto";
 import Layout from "../layouts/Layout.astro";
 import TickerCompleteInfo from "../components/TickerCompleteInfo.vue";
 
-import type { Ticker, TickerAssetResponse } from "../types/Ticker";
+import type { Ticker, TickerAssetResponse, TickerAssetDTO } from "../types/Ticker";
 
 export const prerender = false;
 
 const { ticker: tickerSym } = Astro.params;
 
-const response: TickerAssetResponse = await getTickerAssets(tickerSym);
-
-// TODO:
-// 1) Change to Ticker []
-const dto: TickerAssetDTO = _TickerAssetDTO(response);
+const dto: TickerAssetDTO = await getTickerAssets(tickerSym).then(response => _TickerAssetDTO(response));
+const ticker: Ticker = {
+	symbol: dto.symbol,
+	title: dto.title.toUpperCase(),
+	logoUrl: dto.logoUrl || "#",
+	description: dto.description,
+	websiteUrl: dto.websiteUrl,
+	priceInUSD: dto.priceInUSD,
+	priceInUSDUpdatedOn: dto.priceInUSDUpdatedOn,
+	createdOn: dto.createdOn,
+	launchDate: dto.launchDate,
+	fullDescription: dto.fullDescription,
+};
 ---
 
 <Layout title="Ticker">
 	<section>
 		<TickerCompleteInfo
 			client:load
-			ticker={dto}
+			ticker={ticker}
 		/>
 	</section>
 </Layout>
