@@ -30,6 +30,7 @@ async function handleNewTickerEnter() {
 	TickersDispatcher.dispatch(TickersActions.AddNewTicker, newTicker);
 	newTickerSym.value = "";
 }
+
 </script>
 
 <style>

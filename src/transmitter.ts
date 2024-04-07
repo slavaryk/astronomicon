@@ -1,5 +1,6 @@
 import SharedWorker from "./shared-worker.ts?sharedworker";
 import { MessageParty } from "./enum/MessageParty";
+
 import type { Message } from "./types/Message";
 
 type PartySubscriber = (data: unknown) => void;

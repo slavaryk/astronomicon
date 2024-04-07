@@ -9,6 +9,7 @@ const MILLISECONDS = 1000;
 
 export function NewTickerPriceDTO(data: TickerPriceResponse): _NewTickerPriceDTO {
 	return {
+		type: data?.TYPE ?? "",
 		symbol: data?.FROMSYMBOL ?? "",
 		newPrice: data?.PRICE ?? null,
 	};

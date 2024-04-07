@@ -32,6 +32,7 @@ export type TickerAssetDTO = {
 }
 
 export type NewTickerPriceDTO = {
+	type: string;
 	symbol: TickerSymbol;
 	newPrice: number | null;
 }
@@ -39,6 +40,7 @@ export type NewTickerPriceDTO = {
 export type TickerSymbol = string;
 
 export type TickerPriceResponse = {
+	TYPE?: string;
 	FROMSYMBOL?: string;
 	PRICE?: number;
 }

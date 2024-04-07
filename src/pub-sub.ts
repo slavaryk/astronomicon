@@ -13,9 +13,9 @@ const subscribers = new Map<TickerSymbol, ((newTickerPrice: _NewTickerPriceDTO) 
 
 addSubscriptionTo(MessageParty.WEB_SOCKET, receiveUpdateTickerMessage);
 
-export function receiveUpdateTickerMessage(ticker: TickerPriceResponse) {
-	const dto = NewTickerPriceDTO(ticker);
-	if (subscribers.has(dto.symbol) && dto.newPrice !== null) notifySubscribers(dto);
+export function receiveUpdateTickerMessage(price: TickerPriceResponse) {
+	const dto = NewTickerPriceDTO(price);
+	if (subscribers.has(dto.symbol)) notifySubscribers(dto);
 }
 
 function notifySubscribers(newTickerPrice: _NewTickerPriceDTO) {
