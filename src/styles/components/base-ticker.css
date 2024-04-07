@@ -1,0 +1,42 @@
+.base-ticker {
+	padding: 10px;
+	display: flex;
+	column-gap: 8px;
+	border: 1px solid transparent;
+	border-radius: 8px;
+	transition: border-color 0.15s;
+}
+
+.base-ticker:hover {
+	border-color: #999;
+}
+
+.base-ticker__info {
+	padding-right: 1em;
+	border: 1px solid transparent;
+	transition: border-color 0.15;
+}
+
+.base-ticker:hover .base-ticker__info {
+	border-right-color: #999;
+}
+
+.base-ticker:hover .base-ticker__controls {
+	opacity: 1;
+}
+
+.base-ticker__controls {
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+
+.base-ticker__delete-button {
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	border: 0;
+}
+
+.base-ticker__delete-button:hover .base-ticker__delete-icon {
+	stroke: #999;
+}
