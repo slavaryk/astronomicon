@@ -22,6 +22,8 @@ import { $tickers } from "../stores/tickers";
 import { $tickersCounter } from "../stores/tickers-counter";
 import { TickersDispatcher, TickersActions } from "../stores/tickers/actions";
 import { subscribeToUpdatesOf } from "../pub-sub";
+import { NewTickerPriceDTO } from "../dto";
+
 import BaseTicker from "./BaseTicker.vue";
 
 const tickersStore = useStore($tickers);
@@ -30,7 +32,8 @@ const tickersCounterStore = useStore($tickersCounter);
 watch(tickersCounterStore, () => {
 	const ticker = tickersStore.value[tickersCounterStore.value];
 
-	subscribeToUpdatesOf(ticker, newPriceDto => {
+	subscribeToUpdatesOf(ticker, data => {
+		const newPriceDto = NewTickerPriceDTO(data);
 		TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, ticker, newPriceDto);
 	});
 });
