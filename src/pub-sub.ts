@@ -36,6 +36,17 @@ export function subscribeToUpdatesOf(
 	}
 }
 
+export function unsubscribeFromUpdatesOf(
+	ticker: TickerShort,
+)
+{
+	const tickerSymbol = ticker.symbol;
+
+	if (subscribers.has(tickerSymbol)) {
+		subscribers.delete(tickerSymbol);
+	}
+}
+
 function postSubscribeToTickerMessage(tickerSym: TickerSymbol) {
 	const subscribeToTickerData = {
 		action: "SubAdd",

@@ -1,7 +1,7 @@
 <template>
 	<ul class="ticker-list">
 		<li
-			v-for="ticker of tickersStore"
+			v-for="(ticker, index) of tickersStore"
 			:key="ticker.symbol"
 			class="ticker-list__item"
 		>
@@ -9,6 +9,7 @@
 				<BaseTicker
 					:ticker-price="ticker.price"
 					:ticker-title="ticker.symbol"
+					@delete="handleTickerDelete(index)"
 				/>
 			</a>
 		</li>
@@ -21,7 +22,7 @@ import { useStore } from "@nanostores/vue";
 import { $tickers } from "../stores/tickers";
 import { $tickersCounter } from "../stores/tickers-counter";
 import { TickersDispatcher, TickersActions } from "../stores/tickers/actions";
-import { subscribeToUpdatesOf } from "../pub-sub";
+import { subscribeToUpdatesOf, unsubscribeFromUpdatesOf } from "../pub-sub";
 import { NewTickerPriceDTO } from "../dto";
 
 import BaseTicker from "./BaseTicker.vue";
@@ -32,9 +33,20 @@ const tickersCounterStore = useStore($tickersCounter);
 watch(tickersCounterStore, () => {
 	const ticker = tickersStore.value[tickersCounterStore.value];
 
-	subscribeToUpdatesOf(ticker, data => {
-		const newPriceDto = NewTickerPriceDTO(data);
-		TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, ticker, newPriceDto);
-	});
+	if (ticker) {
+		subscribeToUpdatesOf(ticker, data => {
+			const newPriceDto = NewTickerPriceDTO(data);
+			TickersDispatcher.dispatch(TickersActions.UpdateTickerPrice, ticker, newPriceDto);
+		});
+	}
 });
+
+function handleTickerDelete(tickerIndex: number) {
+	const ticker = tickersStore.value[tickerIndex];
+
+	if (ticker) {
+		unsubscribeFromUpdatesOf(ticker);
+		TickersDispatcher.dispatch(TickersActions.DeleteTicker, tickerIndex);
+	}
+}
 </script>

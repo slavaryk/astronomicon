@@ -21,13 +21,12 @@
 	border-right-color: #999;
 }
 
-.base-ticker:hover .base-ticker__controls {
-	opacity: 1;
-}
-
 .base-ticker__controls {
 	opacity: 0;
-	transition: opacity 0.15s;
+}
+
+.base-ticker:hover .base-ticker__controls {
+	opacity: 1;
 }
 
 .base-ticker__delete-button {

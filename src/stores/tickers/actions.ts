@@ -6,6 +6,7 @@ import type { TickerShort, NewTickerPriceDTO } from "../../types/Ticker";
 export enum TickersActions {
 	AddNewTicker = "AddNewTicker",
 	UpdateTickerPrice = "UpdateTickerPrice",
+	DeleteTicker = "DeleteTicker",
 }
 
 export const TickersDispatcher: Dispatcher<TickersActions> = {
@@ -29,6 +30,17 @@ export const TickersDispatcher: Dispatcher<TickersActions> = {
 			const tickerIndex = tickers.findIndex(_ => _.symbol === ticker.symbol);
 
 			tickers[tickerIndex].price = newPriceDto.newPrice;
+
+			store.set([...tickers]);
+		},
+	),
+
+	[TickersActions.DeleteTicker]: action(
+		$tickers,
+		TickersActions.DeleteTicker,
+		(store, tickerIndex) => {
+			const tickers = store.get();
+			tickers.splice(tickerIndex, 1);
 
 			store.set([...tickers]);
 		},
