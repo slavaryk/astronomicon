@@ -7,3 +7,11 @@ export async function getTickerAssets(tickerSym: string) {
 
 	return response.json();
 }
+
+export async function getTopSymbols(limit: number = 20) {
+	const response = await fetch(
+		`https://min-api.cryptocompare.com/data/exchange/top/volume?e=Binance&direction=TO&limit=${limit}`,
+	);
+
+	return response.json();
+}

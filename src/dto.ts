@@ -5,6 +5,8 @@ import type {
 	TickerAssetResponse,
 } from "./types/Ticker";
 
+import type { CoinListResponse, CoinListDTO as _CoinListDTO } from "./types/Coin.ts";
+
 const MILLISECONDS = 1000;
 
 export function NewTickerPriceDTO(data: TickerPriceResponse): _NewTickerPriceDTO {
@@ -29,4 +31,8 @@ export function TickerAssetDTO(data: TickerAssetResponse): _TickerAssetDTO {
 		priceInUSDUpdatedOn: data?.Data.PRICE_USD_LAST_UPDATE_TS ? new Date (data?.Data.PRICE_USD_LAST_UPDATE_TS * MILLISECONDS) : 0,
 		fullDescription: data?.Data.ASSET_DESCRIPTION ?? "",
 	};
+}
+
+export function CoinListDTO(data: CoinListResponse): _CoinListDTO {
+	return data.Data.map(coin => coin.fromSymbol) ?? [];
 }

@@ -1,25 +1,36 @@
 <template>
-	<label class="add-ticker">
-		<h4 class="add-ticker__label">
-			Add new ticker
-		</h4>
-		<input
-			class="add-ticker__input"
-			type="text"
-			placeholder="BTC for example"
+	<div>
+		<label class="add-ticker">
+			<h4 class="add-ticker__label">
+				Add new ticker
+			</h4>
+			<input
+				class="add-ticker__input"
+				type="text"
+				placeholder="BTC for example"
+				v-model="newTickerSym"
+				@keyup.enter="handleNewTickerEnter"
+			/>
+		</label>
+		<BaseSelect
+			:options="topSymbols"
 			v-model="newTickerSym"
-			@keyup.enter="handleNewTickerEnter"
 		/>
-	</label>
+	</div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { TickersDispatcher, TickersActions } from "../stores/tickers/actions";
+import { getTopSymbols } from "../api";
+import { CoinListDTO } from "../dto";
 
-import type { TickerShort } from "../types/Ticker";
+import BaseSelect from "./BaseSelect.vue";
+
+import type { TickerSymbol, TickerShort } from "../types/Ticker";
 
 const newTickerSym = ref("");
+const topSymbols = ref<TickerSymbol[]>([]);
 
 async function handleNewTickerEnter() {
 	const newTicker: TickerShort = {
@@ -31,6 +42,12 @@ async function handleNewTickerEnter() {
 	newTickerSym.value = "";
 }
 
+
+onMounted(() => {
+	getTopSymbols().then(response => {
+		topSymbols.value = CoinListDTO(response);
+	});
+});
 </script>
 
 <style>

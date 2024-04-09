@@ -1,3 +1,5 @@
+export type TickerSymbol = string;
+
 export type Ticker = {
 	id: number;
 	symbol: TickerSymbol;
@@ -36,8 +38,6 @@ export type NewTickerPriceDTO = {
 	symbol: TickerSymbol;
 	newPrice: number | null;
 }
-
-export type TickerSymbol = string;
 
 export type TickerPriceResponse = {
 	TYPE?: string;
